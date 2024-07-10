@@ -29,6 +29,7 @@
     <properties>
         <java.version>17</java.version>
         <problem-spring-web.version>0.29.1</problem-spring-web.version>
+        <jib-maven-plugin.version>3.4.3</jib-maven-plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -121,7 +122,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <pullPolicy>IF_NOT_PRESENT</pullPolicy>
+                        <name>philips413/bookmarker-api</name>
                     </image>
                     <excludes>
                         <exclude>
@@ -129,6 +130,32 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <from>
+                        <image>eclipse-temurin:17-jre-focal</image>
+                    </from>
+                    <to>
+                        <image>philips413/bookmarker-api</image>
+                        <auth>
+                            <username>philips413</username>
+                            <password>24wkdsla!@@</password>
+                        </auth>
+                        <tags>
+                            <tag>latest</tag>
+                        </tags>
+                    </to>
+                    <container>
+                        <ports>
+                            <port>8080</port>
+                        </ports>
+                    </container>
                 </configuration>
             </plugin>
         </plugins>
